@@ -1,0 +1,58 @@
+ul li {
+    display: inline;
+}
+form {
+    width: 360px;
+}
+
+    form input[type=text], form select, form input.textfield {
+        display: block;
+        font-size: inherit;
+        margin: 0 0 22px 0;
+    }
+
+    form input[type=text], form input.textfield {
+        width: 348px;
+        height: 25px;
+        line-height: 1.7em;
+    }
+
+    form div.label {
+        text-align: right;
+        overflow: hidden;
+        margin: 0 0 22px 0;
+    }
+
+        form div.label span {
+            float: left;
+        }
+
+        form div.label input {
+            margin: 0 2px 0 10px;
+        }
+
+    form textarea {
+        width: 348px;
+        height: 185px;
+        margin: 0 0 22px 0;
+        resize: none;
+    }
+
+    form form p {
+        color: #929292;
+        font-size: 0.85em;
+    }
+
+    form select {
+        width: 360px;
+        height: 27px;
+        border: 1px solid #ccc;
+        line-height: 2;
+        padding: 0;
+        outline: none;
+        color: #444444;
+    }
+
+        form select.wide {
+            width: 540px;
+        }
