@@ -34,14 +34,16 @@ class Messages_m extends MY_Model
 	return $this->db->insert_id();
     }
     
-    public function get_messages ($num, $offset)
+    public function get_messages ($num, $offset, $user = null)
     {
 	$this->db->order_by('id','desc');
+	if ($user) $this->db->where('from_id', $user);
         return $this->db->get('messages_content', $num, $offset)->result();
     }
     
-    public function count_messages()
+    public function count_messages($user = null)
     {
+	if (!is_null($user)) $this->db->where('from_id', $user);
         return $this->db->get('messages_content')->num_rows();
     }
     

@@ -1,5 +1,5 @@
 <section class="title">
-	<h4><?= lang('view_sended_messages'); ?></h4>
+	<h4><?= lang('view_sended_messages'); ?> (<?= $count;?>)</h4>
 </section>
 <section class="item">
 <? if (!empty($messages)) { ?>
@@ -26,7 +26,7 @@
 					<?php $link_profiles = Settings::get('enable_profiles'); ?>
 					<?php foreach ($messages as $message): ?>
 						<tr>
-							<td class="collapse"><?= $message->from; ?></td>
+							<td class="collapse"><a href="/admin/messages/view/user/<?= $message->from_id; ?>/"><?= $message->from; ?></a></td>
 							<td><?= $message->to; ?></td>
 							<td class="collapse"><?= $message->ip; ?></td>
 							<td class="collapse"><?= $message->message; ?></td>

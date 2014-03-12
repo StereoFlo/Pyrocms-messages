@@ -11,7 +11,6 @@ class Messages extends Public_Controller
         $this->lang->load('messages');
         $this->load->library('form_validation');
         $this->template->title($this->module_details['name'])
-                        //->append_metadata('<link href="/addons/shared_addons/modules/messages/css/frontend.style.css" type="text/css" rel="stylesheet" />');
 			->append_metadata(css('frontend.style.css', 'messages'));
         if (empty($this->current_user))
         {

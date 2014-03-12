@@ -19,13 +19,13 @@ class Module_Messages extends Module {
 			'backend' => TRUE,
 			'menu' => 'utilities',
 			'sections' => array(
+			   'view' => array(
+				    'name' => 'shortcutVievMessages',
+				    'uri' => 'admin/messages'
+			    ),
 			    'settings' => array(
 				    'name' => 'shortcutSetting',
-				    'uri' => 'admin/messages',
-				),
-				'messages' => array(
-				    'name' => 'shortcutVievMessages',
-				    'uri' => 'admin/messages/view'
+				    'uri' => 'admin/messages/settings',
 				),
 			),
 		);
