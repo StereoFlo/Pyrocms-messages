@@ -7,7 +7,6 @@ class Admin extends Admin_Controller {
     public function __construct()
     {
 	parent::__construct();
-	$this->load->library('form_validation');
 	$this->load->model('messages_m');
         $this->lang->load('messages');
     }
