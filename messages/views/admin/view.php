@@ -1,3 +1,4 @@
+
 <section class="title">
 	<h4><?= lang('view_sended_messages'); ?> (<?= $count;?>)</h4>
 </section>
@@ -25,8 +26,10 @@
 				<tbody>
 					<?php $link_profiles = Settings::get('enable_profiles'); ?>
 					<?php foreach ($messages as $message): ?>
-						<tr>
-							<td class="collapse"><a href="/admin/messages/view/user/<?= $message->from_id; ?>/"><?= $message->from; ?></a></td>
+						<tr id="tr_<?= $message->id; ?>">
+							<td class="collapse"><a href="/admin/messages/view/user/<?= $message->from_id; ?>/"><?= $message->from; ?></a> 
+							[ <div style="display: inline; cursor: pointer;" id="block_<?= $message->id; ?>" messageID="<?= $message->id; ?>" userID="<?= $message->from_id; ?>">Block</div> ]</td> 
+							<? /*href="<?= base_url('/admin/messages/block/block/'. $message->from_id . '/' . $message->id ) ?>"*/ ?>
 							<td><?= $message->to; ?></td>
 							<td class="collapse"><?= $message->ip; ?></td>
 							<td class="collapse"><?= $message->message; ?></td>

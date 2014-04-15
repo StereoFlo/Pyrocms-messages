@@ -26,7 +26,7 @@ class Admin_settings extends Admin_Controller {
             $this->data->messages = $this->messages_m->get_settings();
             $this->template
                 ->title($this->module_details['name'])
-                ->build('admin/index', $this->data);
+                ->build('admin/settings', $this->data);
         }
         else
         {
@@ -41,7 +41,7 @@ class Admin_settings extends Admin_Controller {
 		    $this->messages_m->add_settings($_POST);
 		}	
 		$this->session->set_flashdata('success', lang('messSuccess'));	
-		redirect('admin/messages');
+		redirect('admin/messages/settings');
 	    }
         }
     }

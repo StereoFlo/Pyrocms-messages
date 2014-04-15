@@ -21,4 +21,5 @@
 */
 
 $route['messages/admin/settings(/:any)?'] = 'admin_settings$1';
+$route['messages/admin/block(/:any)?'] = 'admin_block$1';
 $route['messages/admin/view(/:any)?'] = 'admin$1';

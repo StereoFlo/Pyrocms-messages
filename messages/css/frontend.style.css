@@ -56,3 +56,32 @@ form {
         form select.wide {
             width: 540px;
         }
+        
+.window { 
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	width: 300px;
+	z-index:100; 
+	/*margin-left: 15px; */ 
+	border:1px solid #e5e5e5;      
+	padding:15px; 
+	-moz-box-shadow: 0 0 5px #e5e5e5;
+	-webkit-box-shadow: 0 0 5px #e5e5e5;
+	box-shadow: 0 0 5px #e5e5e5;
+	background-color: #ffffff;
+}
+
+.name {
+	float: left;
+	width: 50%;
+}
+.phone {
+	float: left;
+	width: 25%;	
+}
+.delete {
+	float: left;
+	width: 25%;	
+}

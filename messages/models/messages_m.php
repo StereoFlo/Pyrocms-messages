@@ -63,11 +63,25 @@ class Messages_m extends MY_Model
 	$this->db->set('message', $data['message']);
 	$this->db->insert('messages_content');
     }
+    
+    public function get_users ()
+    {
+    	$this->db->distinct();
+    	$this->db->select('from_id');
+		return $this->db->get('messages_content')->result();
+	}
+    
     public function get_message_by_userid ($id, $num, $offset)
     {
-	$this->db->order_by('id','desc');
-	$this->db->where('from_id', $id);
-	return $this->db->get('messages_content', $num, $offset)->result();
+		$this->db->order_by('id','desc');
+		$this->db->where('from_id', $id);
+		return $this->db->get('messages_content', $num, $offset)->result();
+    }
+
+    public function get_message_by_id ($id)
+    {
+		$this->db->where('id', $id);
+		return $this->db->get('messages_content')->row();
     }
     
     public function get_message_by_userid_count ($id)
@@ -75,4 +89,65 @@ class Messages_m extends MY_Model
 	$this->db->where('from_id', $id);
 	return $this->db->get('messages_content')->num_rows();
     }
+    
+    public function get_block ()
+    {
+		return $this->db->get('messages_block')->result();
+	}
+    public function get_block_by_user ($userid)
+    {
+    	$this->db->where('user_id', $userid);
+		return $this->db->get('messages_block')->row();
+	}
+    
+    public function check_block ($id)
+    {
+		$this->db->where('user_id', $id);
+		return $this->db->get('messages_block')->num_rows();
+	}
+    
+    public function block_user ($id, $reason)
+    {
+		$this->db->where('user_id', $id);
+		$result = $this->db->get('messages_block')->num_rows();
+		if ($result > 0)
+		{
+			$this->db->set('reason', $reason);
+			$this->db->update('messages_block');
+		}
+		else
+		{
+			$this->db->set('user_id', $id);
+			$this->db->set('reason', $reason);
+			$this->db->insert('messages_block');
+		}
+		return $this->db->affected_rows();
+	}
+	
+	public function unblock_user ($id)
+	{
+		$this->db->where('user_id', $id);
+		$this->db->delete('messages_block');
+	}
+	
+	public function add_to_book ($name, $phone, $user_id)
+	{
+		$this->db->set('name', $name);
+		$this->db->set('phone', $phone);
+		$this->db->set('user_id', $user_id);
+		$this->db->insert('messages_book');
+	}
+	
+	public function get_contacts ($user_id)
+	{
+		$this->db->where('user_id', $user_id);
+		return $this->db->get('messages_book')->result();
+	}
+	
+	public function delete_contact ($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('messages_book');
+	}
+	
 }

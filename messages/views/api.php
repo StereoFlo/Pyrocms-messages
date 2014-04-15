@@ -11,6 +11,11 @@
         if you see this page, API is running.
     </p>
     
+    <p>
+    	Of you want to send a message from web interface, please, go to the our web site:<br/>
+    	<a href="http://www.szf.su">www.szf.su</a>
+    </p>
+    
     <p>Some functions for use the our service:</p>
     <ul>
         <li>We can to accept only GET requests with some parameters</li>

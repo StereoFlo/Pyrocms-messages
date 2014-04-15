@@ -23,6 +23,10 @@ class Module_Messages extends Module {
 				    'name' => 'shortcutVievMessages',
 				    'uri' => 'admin/messages'
 			    ),
+			   'block' => array(
+				    'name' => 'shortcutBlocked',
+				    'uri' => 'admin/messages/block'
+			    ),
 			    'settings' => array(
 				    'name' => 'shortcutSetting',
 				    'uri' => 'admin/messages/settings',
@@ -58,7 +62,30 @@ class Module_Messages extends Module {
 			`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 			) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT = 'Messages table';
 		";		
-		if($this->db->query($messages_settings) and $this->db->query($messages_content)){
+		$messages_block = "
+			CREATE TABLE ".$this->db->dbprefix('messages_block')." (
+			  id int(11) NOT NULL AUTO_INCREMENT,
+			  user_id int(11) DEFAULT NULL,
+			  reason text DEFAULT NULL,
+			  PRIMARY KEY (id)
+			) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT = 'Messages block table';
+		";	
+		
+		$messages_book = "
+			CREATE TABLE ".$this->db->dbprefix('messages_book')." (
+			  id int(11) NOT NULL AUTO_INCREMENT,
+			  user_id int(11) DEFAULT NULL,
+			  name varchar(50) DEFAULT NULL,
+			  phone varchar(255) DEFAULT NULL,
+			  PRIMARY KEY (id)
+			) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT = 'Messages book table';
+		";	
+		if($this->db->query($messages_settings) 
+			and $this->db->query($messages_content) 
+			and $this->db->query($messages_block)
+			and $this->db->query($messages_book)
+			)
+		{
 			return TRUE;
 		}
 	}
@@ -67,6 +94,8 @@ class Module_Messages extends Module {
 	{
 		$this->dbforge->drop_table('messages_settings');
 		$this->dbforge->drop_table('messages_content');
+		$this->dbforge->drop_table('messages_block');
+		$this->dbforge->drop_table('messages_book');
 		return TRUE;
 	}
 
@@ -78,6 +107,6 @@ class Module_Messages extends Module {
 
 	public function help()
 	{
-		return "No documentation has been added for this module.<br />Contact the module developer for assistance.";
+		return "No documentation for this module.<br />Contact the module developer for assistance.";
 	}
 }

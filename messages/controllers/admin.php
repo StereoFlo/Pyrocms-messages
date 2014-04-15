@@ -6,9 +6,11 @@ class Admin extends Admin_Controller {
     
     public function __construct()
     {
-	parent::__construct();
-	$this->load->model('messages_m');
+		parent::__construct();
+		$this->load->model('messages_m');
         $this->lang->load('messages');
+        $this->template->append_metadata(js('admin.js', 'messages'));
+        
     }
 
     public function index ()
