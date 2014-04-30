@@ -33,6 +33,10 @@
 		<td><textarea name="template"><?= (isset($messages[0]->template)) ? $messages[0]->template : ""; ?></textarea></td>
 	</tr>
 	<tr>
+		<td>Use ajax on the frontend:</td>
+		<td><?= form_dropdown('ajax', array('0' => 'No', '1' => 'Yes'), (isset($messages[0]->ajax)) ? $messages[0]->ajax : "");  ?></td>
+	</tr>
+	<tr>
 		<td colspan="2">
 			<button class="btn blue" value="save" name="btnAction" type="submit"><span><?= lang('btnSave'); ?></span></button>
 				&nbsp;&nbsp;

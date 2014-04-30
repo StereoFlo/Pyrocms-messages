@@ -9,13 +9,14 @@ class Messages_m extends MY_Model
     
     public function update_settings($input)
     {
-	$data = array(
-        'host' => $input['host'],
-        'port' => $input['port'],
-        'user' => $input['user'],
-        'pass' => $input['pass'],
-        'src_number' => $input['src_number'],
-	'template' => $input['template'],
+		$data = array(
+	        'host' => $input['host'],
+	        'port' => $input['port'],
+	        'user' => $input['user'],
+	        'pass' => $input['pass'],
+	        'src_number' => $input['src_number'],
+			'template' => $input['template'],
+			'ajax' => $input['ajax'],
         );
 
 	$this->db->where('id', $input['id']);
@@ -30,6 +31,7 @@ class Messages_m extends MY_Model
 	$this->db->set('pass', $data['pass']);
 	$this->db->set('src_number', $data['src_number']);
 	$this->db->set('template', $data['template']);
+	$this->db->set('ajax', $data['ajax']);
 
 	$this->db->insert('messages_settings');
 	return $this->db->insert_id();
@@ -37,8 +39,8 @@ class Messages_m extends MY_Model
     
     public function get_messages ($num, $offset, $user = null)
     {
-	$this->db->order_by('id','desc');
-	if ($user) $this->db->where('from_id', $user);
+		$this->db->order_by('id','desc');
+		if ($user) $this->db->where('from_id', $user);
         return $this->db->get('messages_content', $num, $offset)->result();
     }
     
@@ -56,12 +58,12 @@ class Messages_m extends MY_Model
     
     public function add_message ($data)
     {
-	$this->db->set('to', $data['to']);
-	$this->db->set('from', $data['from']);
-	$this->db->set('from_id', $data['from_id']);
-	$this->db->set('ip', $data['ip']);
-	$this->db->set('message', $data['message']);
-	$this->db->insert('messages_content');
+		$this->db->set('to', $data['to']);
+		$this->db->set('from', $data['from']);
+		$this->db->set('from_id', $data['from_id']);
+		$this->db->set('ip', $data['ip']);
+		$this->db->set('message', $data['message']);
+		$this->db->insert('messages_content');
     }
     
     public function get_users ()

@@ -42,24 +42,27 @@ class Module_Messages extends Module {
 		
 		$messages_settings = "
 			CREATE TABLE ".$this->db->dbprefix('messages_settings')." (
-			`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`host` VARCHAR(255) NULL ,
-			`port` VARCHAR(255) NULL ,
-			`user` VARCHAR(255) NULL ,
-			`pass` VARCHAR(255) NULL ,
-			`src_number` VARCHAR( 255 ) NULL,
-			`template` TEXT NULL
+			  id int(11) NOT NULL AUTO_INCREMENT,
+			  host varchar(255) DEFAULT NULL,
+			  port varchar(255) DEFAULT NULL,
+			  user varchar(255) DEFAULT NULL,
+			  pass varchar(255) DEFAULT NULL,
+			  src_number varchar(255) DEFAULT NULL,
+			  template text DEFAULT NULL,
+			  ajax int(11) DEFAULT NULL,
+			  PRIMARY KEY (id)
 			) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT = 'Config for Messages';
 		";
 		$messages_content = "
 			CREATE TABLE ".$this->db->dbprefix('messages_content')." (
-			`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`to` VARCHAR(255) NULL ,
-			`from` VARCHAR(255) NULL ,
-			`from_id` VARCHAR(255) NULL ,
-			`ip` VARCHAR(255) NULL ,
-			`message` VARCHAR(255) NULL ,
-			`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+			  id int(11) NOT NULL AUTO_INCREMENT,
+			  `to` varchar(255) DEFAULT NULL,
+			  `from` varchar(255) DEFAULT NULL,
+			  from_id varchar(255) DEFAULT NULL,
+			  ip varchar(255) DEFAULT NULL,
+			  message varchar(255) DEFAULT NULL,
+			  date timestamp DEFAULT CURRENT_TIMESTAMP,
+			  PRIMARY KEY (id)
 			) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT = 'Messages table';
 		";		
 		$messages_block = "

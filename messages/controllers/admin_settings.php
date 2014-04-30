@@ -14,18 +14,19 @@ class Admin_settings extends Admin_Controller {
 
     public function index()
     {
-	$this->form_validation->set_rules('host', lang('host'), 'trim|required');
-	$this->form_validation->set_rules('pass', lang('pass'), 'trim|required');
-	$this->form_validation->set_rules('port', lang('port'), 'trim|required');
-	$this->form_validation->set_rules('user', lang('user'), 'trim|required');
-	$this->form_validation->set_rules('src_number', lang('src_number'), 'trim|required');
-	$this->form_validation->set_rules('port', 'IP', 'trim|required');       
+		$this->form_validation->set_rules('host', lang('host'), 'trim|required');
+		$this->form_validation->set_rules('pass', lang('pass'), 'trim|required');
+		$this->form_validation->set_rules('port', lang('port'), 'trim|required');
+		$this->form_validation->set_rules('user', lang('user'), 'trim|required');
+		$this->form_validation->set_rules('src_number', lang('src_number'), 'trim|required');
+		$this->form_validation->set_rules('port', 'IP', 'trim|required');       
                 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->data->messages = $this->messages_m->get_settings();
+            $messages = $this->messages_m->get_settings();
             $this->template
                 ->title($this->module_details['name'])
+                ->set('messages', $messages)
                 ->build('admin/settings', $this->data);
         }
         else

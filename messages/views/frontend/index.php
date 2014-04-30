@@ -17,22 +17,29 @@
 		<?php echo validation_errors();?>
 	</div>
 	<?php endif;?>
-        
+    <div id="send_form">
         <?= form_open('messages?action=send');?>
-
 			<p>
-				<label for="first_name"><?= lang('sender');?>:</label><br/>
-				<?= form_input('from', $user_name, 'disabled="disabled"'); ?>
+				<label for="from"><?= lang('sender');?>:</label><br/>
+				<?= form_input('from', $user_name, 'id="from" disabled="disabled"'); ?>
 			</p>
 
 			<p>
 				<label for="to"><?= lang('reciver');?>:</label> (<a href="#" id="toLnk">Записная книга</a>)<br/>
-				<?= form_input('to', NULL, 'id="to"'); ?> <!---->
+				<?= form_input('to', NULL, 'id="to" autocomplete="off"'); ?>
 			</p>
 			<p>
-				<label for="display_name"><?= lang('message');?>:</label>
-				<?php echo form_textarea(array('name' => 'message', 'cols' => 20, 'rows' => 5)); ?>
+				<label for="message"><?= lang('message');?>:</label>
+				<?php echo form_textarea(array('name' => 'message', 'cols' => 20, 'rows' => 5, 'id' => 'message')); ?>
 			</p>
-        <?= form_submit('', lang('btnSend')); ?>
+		<? if ($ajax == 0) { ?>
+		<?= form_submit('', lang('btnSend')); ?>
+        <? } else { ?>
+        <?= form_button('', lang('btnSend'), 'id="btnSendSMS"'); ?>
+        <? } ?>
         <?= form_close(); ?>
+    </div>
+    <div id="results" style="display: none">
+    	You message(s) has been sent
+    </div>
 </div>

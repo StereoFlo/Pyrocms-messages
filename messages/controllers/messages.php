@@ -10,24 +10,29 @@ class Messages extends Public_Controller
         $this->load->library('form_validation');
         $this->template->title($this->module_details['name'])
         	->append_metadata(js('book.js', 'messages'))
+        	->append_metadata(js('send.js', 'messages'))
 			->append_metadata(css('frontend.style.css', 'messages'));
         if (empty($this->current_user))
         {
+        	$this->session->set_userdata('redirect_to', base_url('messages'));
             redirect('users/login');
         }
+        $this->data = new stdClass();
     }
     
     public function index ()
     {
+    	$smpp_settings = $this->messages_m->get_settings();
     	$check_block = $this->messages_m->check_block($this->current_user->id);
     	$this->data->contacts = $this->messages_m->get_contacts($this->current_user->id);
     	if ($check_block > 0)
     	{
-			$this->template->title($this->module_details['name'])->build('frontend/block', $this->data);
+			$this->template
+				->title($this->module_details['name'])
+				->build('frontend/block', $this->data);
 		}
     	else
     	{
-	        $smpp_settings = $this->messages_m->get_settings();
 	        $smpp_param = array('server' => $smpp_settings[0]->host,
 	                            'port' => $smpp_settings[0]->port,
 	                            'user' => $smpp_settings[0]->user,
@@ -40,7 +45,10 @@ class Messages extends Public_Controller
 	        if ($this->form_validation->run() == FALSE)
 	        {
 	            $this->data->user_name = $this->current_user->full_name;
-	            $this->template->title($this->module_details['name'])->build('frontend/index', $this->data);
+	            $this->template
+	            	->title($this->module_details['name'])
+	            	->set('ajax', $smpp_settings[0]->ajax)
+	            	->build('frontend/index', $this->data);
 	        }
 	        else
 	        {
@@ -79,24 +87,22 @@ class Messages extends Public_Controller
 	                {
 	                    if (strlen($values) == 10)
 	                    {
-	                            $send = $this->smpp->send_ru('7'.$values, $formatted_message);
-				    if ($send == true)
-				    {
-					$this->messages_m->add_message(array('to' => '7'.$values, 'message' => $message, 'ip' => $ip, 'from' => $this->current_user->full_name, 'from_id' => $this->current_user->id));
-				    }
+	                        $send = $this->smpp->send_ru('7'.$values, $formatted_message);
+						    if ($send == true)
+						    {
+								$this->messages_m->add_message(array('to' => '7'.$values, 'message' => $message, 'ip' => $ip, 'from' => $this->current_user->full_name, 'from_id' => $this->current_user->id));
+						    }
 	                    }
 	                }
-	                
-	                if ($send == TRUE)
+	                if ($smpp_settings[0]->ajax == 1)
 	                {
-	                    $this->session->set_flashdata('success', lang('messSent'));
-	                    redirect('messages');
-	                }	
-	                else
-	                {
-	                    $this->session->set_flashdata('error', lang('messNotSent'));
-	                    redirect('messages');
-	                }
+						($send == TRUE) ? print 1 : print 0;
+					}
+					else
+					{
+						($send == TRUE) ? $this->session->set_flashdata('success', lang('messSent')) : $this->session->set_flashdata('error', lang('messNotSent'));
+						redirect('messages');
+					}
 	            }
 	        }
 		}
@@ -106,8 +112,12 @@ class Messages extends Public_Controller
     {
         $UserID = $this->current_user->id;
         $pagination = create_pagination('messages/view', $this->messages_m->get_message_by_userid_count($UserID), NULL, 3);
-        $this->data->messages = $this->messages_m->get_message_by_userid($UserID, $pagination["per_page"], $pagination["current_page"]);
-        $this->template->title($this->module_details['name'])->set('pagination', $pagination['links'])->build('frontend/view', $this->data);
+        $messages = $this->messages_m->get_message_by_userid($UserID, $pagination["per_page"], $pagination["current_page"]);
+        $this->template->
+        	title($this->module_details['name'])->
+        	set('pagination', $pagination['links'])->
+        	set('messages', $messages)->
+        	build('frontend/view');
     }
 
 }
