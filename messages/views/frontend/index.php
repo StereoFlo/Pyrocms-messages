@@ -40,6 +40,6 @@
         <?= form_close(); ?>
     </div>
     <div id="results" style="display: none">
-    	You message(s) has been sent
+    	<?= lang('messageSend'); ?>
     </div>
 </div>
