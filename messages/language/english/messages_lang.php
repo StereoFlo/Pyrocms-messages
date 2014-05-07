@@ -23,7 +23,7 @@ $lang['message']        = "Message";
 $lang['date']           = "Date, time";
 $lang['manage']         = "Manage";
 $lang['btnSend']         = "Manage";
-$lang['messageSend']	= "You message(s) has been sent";
+$lang['messageSend']	= "You message(s) has been sent. . Send another <a id='showForm' href='#showForm'>meesaage</a>";
 $lang['useAjax']		= "Use ajax on the frontend";
 $lang['no']		= "No";
 $lang['yes']		= "Yes";

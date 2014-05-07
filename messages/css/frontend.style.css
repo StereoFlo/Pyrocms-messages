@@ -67,7 +67,6 @@ form {
 	/*margin-left: 15px; */ 
 	border:1px solid #e5e5e5;      
 	padding:15px; 
-	-moz-box-shadow: 0 0 5px #e5e5e5;
 	-webkit-box-shadow: 0 0 5px #e5e5e5;
 	box-shadow: 0 0 5px #e5e5e5;
 	background-color: #ffffff;
@@ -84,4 +83,7 @@ form {
 .delete {
 	float: left;
 	width: 25%;	
+}
+.errsSend {
+	border-color: red;
 }

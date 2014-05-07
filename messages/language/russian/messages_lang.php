@@ -25,7 +25,7 @@ $lang['date']           = "Дата, время";
 $lang['manage']         = "Управление";
 $lang['btnSend']         = "Отправить";
 $lang['titleMessage']         = "Отправить SMS сообщение";
-$lang['messageSend']	= "Ваше сообщение было отправлено";
+$lang['messageSend']	= "Ваше сообщение было отправлено. Отправить еще <a id='showForm' href='#showForm'>сообщение</a>";
 $lang['useAjax']		= "Использовать ajax на сайте";
 $lang['no']		= "Нет";
 $lang['yes']		= "Да";
