@@ -42,8 +42,7 @@ class Smpp {
   private function open($host, $port, $system_id, $password)
   {
     $this->socket = fsockopen($host, $port, $errno, $errstr, $this->timeout);
-    if ($this->socket===false)
-       die("$errstr ($errno)<br />");
+    if ($this->socket===false) die("$errstr ($errno)<br />");
     if (function_exists('stream_set_timeout'))
        stream_set_timeout($this->socket, $this->timeout);
     if($this->debug) print "\n> Connected";

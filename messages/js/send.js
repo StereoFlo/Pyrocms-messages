@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$('#btnSendSMS').click(function(){
-		$('div.window').hide();
+		$('.window').modalBox('close');
 		var message = $('#message').val();
 		var to = $('#to').val();
 		var url = $('form').attr('action');
@@ -17,12 +17,7 @@ $(document).ready(function(){
 				type: "POST",
 				data: { message : message, to : to},
 			}).done(function(data){
-				if (data == 1)
-				{
-					$('#send_form').hide();
-					$('#results').show();
-				}
-				else
+				if (data != 1)
 				{
 					alert("Was an error. You message not sent: \n" + data);
 				}
@@ -35,5 +30,16 @@ $(document).ready(function(){
 		$('#send_form').show();
 		$('#to').val('');
 		$('#message').val('');
+		$('#btnSendSMS').removeAttr('disabled');
+		$('[id^=num_]').prop('checked', false);
 	});
+});
+
+$(document).ajaxStart(function(){
+	$('#send_form').hide();
+	$('#process').show();
+});
+$(document).ajaxStop(function(){
+	$('#process').hide();
+	$('#results').show();
 });

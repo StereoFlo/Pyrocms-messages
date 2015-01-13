@@ -37,9 +37,13 @@
 			открываем адресную книгу
 			*/
 				
-		    $('#toLnk').click(function(){
-		        $('div.window').css('display','block');
-		    });
+			$(document).ready(function(){
+				$('#toLnk').click(function(){
+					$('.window').modalBox({
+						width: '280px'
+					});
+				});
+			});
 		    
 		    /*
 		    Закрываем адресную книгу
@@ -47,7 +51,7 @@
 		    */
 		    
 		    $('a.Close').click(function(){
-		        $('div.window').hide();
+		        $('.window').modalBox('close');
 		    });
 		    
 		    /*

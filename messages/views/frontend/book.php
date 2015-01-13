@@ -1,5 +1,5 @@
 <h2 id="page_title" class="page-title"><?= lang('titleMessage');?></h2>
-<div id="form">
+<div id="form1">
 	<p>Добавить контакт в адресную книгу:</p>
 	Имя: <?= form_input('name', NULL, 'placeholder="Name" id="name"'); ?> 
 	Телефон: <?= form_input('phone', NULL, 'placeholder="9211234567" id="phone"'); ?>

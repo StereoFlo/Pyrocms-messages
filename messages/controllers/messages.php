@@ -11,6 +11,8 @@ class Messages extends Public_Controller
         $this->template->title($this->module_details['name'])
         	->append_metadata(js('book.js', 'messages'))
         	->append_metadata(js('send.js', 'messages'))
+        	->append_metadata(js('modal.js', 'messages'))
+        	->append_metadata(css('modal.css', 'messages'))
 			->append_metadata(css('frontend.style.css', 'messages'));
         if (empty($this->current_user))
         {
