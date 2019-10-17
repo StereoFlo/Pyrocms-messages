@@ -2,7 +2,7 @@
 
 class Smpp {
 
-  private $socket =0 ;
+  private $socket = 0;
   private $seq = 0;
   private $debug = 0;
   private $data_coding = 0;
@@ -13,8 +13,12 @@ class Smpp {
   public $pass;
   public $src_number;
 
-  public function __construct ($param = array())
+  public function __construct($param = [])
   {
+    if (empty($param)) {
+      die('params array is empty');
+    }
+      
     $this->server = $param['server'];
     $this->port = $param['port'];
     $this->user = $param['user'];
