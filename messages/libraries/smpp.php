@@ -2,18 +2,18 @@
 
 class Smpp {
 
-  var $socket =0 ;
-  var $seq = 0;
-  var $debug = 0;
-  var $data_coding = 0;
-  var $timeout = 2;
+  private $socket =0 ;
+  private $seq = 0;
+  private $debug = 0;
+  private $data_coding = 0;
+  private $timeout = 2;
   public $server;
   public $port;
   public $user;
   public $pass;
   public $src_number;
 
-  function __construct ($param = array())
+  public function __construct ($param = array())
   {
     $this->server = $param['server'];
     $this->port = $param['port'];
